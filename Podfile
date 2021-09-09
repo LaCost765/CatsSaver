@@ -9,6 +9,7 @@ target 'CatsSaver' do
   pod 'RxSwift'
   pod 'RxCocoa'
   pod 'RxRelay'
+  pod 'RxDataSources'
   pod 'Alamofire'
   pod 'Kingfisher'
   pod 'RealmSwift'
