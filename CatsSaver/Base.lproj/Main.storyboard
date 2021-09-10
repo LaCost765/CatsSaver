@@ -129,7 +129,11 @@
                     </view>
                     <navigationItem key="navigationItem" id="rfR-kG-gPz">
                         <rightBarButtonItems>
-                            <barButtonItem image="arrow.down.app" catalog="system" id="tTB-46-cQF"/>
+                            <barButtonItem image="arrow.down.app" catalog="system" id="tTB-46-cQF">
+                                <connections>
+                                    <action selector="save:" destination="Mcm-bD-Jxn" id="vao-nr-rGL"/>
+                                </connections>
+                            </barButtonItem>
                             <barButtonItem image="star" catalog="system" id="HsS-l6-Du1"/>
                         </rightBarButtonItems>
                     </navigationItem>
