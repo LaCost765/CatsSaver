@@ -12,6 +12,7 @@ import Kingfisher
 class HomeViewController: UIViewController {
     
     let viewModel = HomeViewModel()
+    var selectedIndexPath: IndexPath!
     @IBOutlet weak var collectionView: UICollectionView!
     
     override func viewDidLoad() {
@@ -36,18 +37,18 @@ class HomeViewController: UIViewController {
             }
         }
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ShowDetail" {
+            guard let cell = sender as? CatPreviewCell,
+                  let image = cell.imageView.image,
+                  let dest = segue.destination as? DetailViewController else { return }
+            
+            dest.setImage(image: image)
+        }
+    }
 }
-
-
-/*
- // MARK: - Navigation
  
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
- // Get the new view controller using segue.destination.
- // Pass the selected object to the new view controller.
- }
- */
 
 extension HomeViewController: UICollectionViewDelegateFlowLayout {
     
@@ -59,6 +60,27 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
         return CGSize(width: view.frame.size.width, height: 50)
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        selectedIndexPath = indexPath
+    }
+}
+
+extension HomeViewController: ZoomingViewController {
+    func zoomingImageView(for transition: ZoomTransitionDelegate) -> UIImageView? {
+        if let indexPath = selectedIndexPath {
+            let cell = collectionView.cellForItem(at: indexPath) as! CatPreviewCell
+            return cell.imageView
+        }
+        
+        return nil
+    }
+    
+    func zoomingBackgroundView(for transition: ZoomTransitionDelegate) -> UIView? {
+        return nil
+    }
+    
+    
 }
 
 
