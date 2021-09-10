@@ -6,21 +6,30 @@
 //
 
 import UIKit
+import AVFoundation
 
 class DetailViewController: UIViewController {
 
-    @IBOutlet weak var imageView: UIImageView!
+    let imageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFill
+        imageView.layer.masksToBounds = true
+        return imageView
+    }()
     
     private var image: UIImage?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.addSubview(imageView)
         imageView.image = self.image
         // Do any additional setup after loading the view.
     }
     
     func setImage(image: UIImage) {
         self.image = image
+        let aspectFitRect = AVMakeRect(aspectRatio: image.size, insideRect: view.bounds)
+        imageView.frame = aspectFitRect
     }
     
     @IBAction func save(_ sender: Any) {

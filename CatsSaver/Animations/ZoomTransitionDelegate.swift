@@ -22,7 +22,7 @@ class ZoomTransitionDelegate: NSObject {
     
     var transitionDuration = 0.5
     var operation: UINavigationController.Operation = .none
-    private let backgroundScale = CGFloat(0.7)
+    private let backgroundScale = CGFloat(0.8)
     
     typealias ZoomingViews = (otherView: UIView, imageView: UIView)
     
@@ -70,8 +70,11 @@ extension ZoomTransitionDelegate: UIViewControllerAnimatedTransitioning {
         let foregroundImageView = maybeForegroundImageView!
         
         let imageViewSnapshot = UIImageView(image: backgroundImageView.image)
-        imageViewSnapshot.contentMode = .scaleAspectFit
+        imageViewSnapshot.contentMode = .scaleAspectFill
         imageViewSnapshot.layer.masksToBounds = true
+        if operation == .pop {
+            imageViewSnapshot.layer.cornerRadius = 15
+        }
         
         backgroundImageView.isHidden = true
         foregroundImageView.isHidden = true
