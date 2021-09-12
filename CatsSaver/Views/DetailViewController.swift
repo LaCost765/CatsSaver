@@ -8,6 +8,9 @@
 import UIKit
 import AVFoundation
 import Kingfisher
+import RxRealm
+import RealmSwift
+import RxSwift
 
 class DetailViewController: UIViewController {
     
@@ -34,7 +37,7 @@ class DetailViewController: UIViewController {
         self.imageView.image = image
     }
     
-    @IBAction func save(_ sender: Any) {
+    @IBAction func save(_ sender: UITabBarItem) {
         
         guard let model = model else { return }
         ImageCache.default.retrieveImage(forKey: model.link) { [weak self] result in
@@ -43,6 +46,23 @@ class DetailViewController: UIViewController {
             case .success(let value):
                 guard let image = value.image else { return }
                 UIImageWriteToSavedPhotosAlbum(image, self, #selector(self.image(_:didFinishSavingWithError:contextInfo:)), nil)
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
+    @IBAction func addToFavorites(_ sender: UITabBarItem) {
+        guard let model = model else { return }
+        ImageCache.default.retrieveImage(forKey: model.link) { result in
+            switch result {
+            case .success(let value):
+                guard let image = value.image else { return }
+                let modelCopy = PhotoModel(id: model.id, link: model.link)
+                modelCopy.data = image.pngData()
+                Observable.from(object: modelCopy)
+                    .subscribe(Realm.rx.add())
+                print(Realm.Configuration.defaultConfiguration.fileURL!)
             case .failure(let error):
                 print(error.localizedDescription)
             }
