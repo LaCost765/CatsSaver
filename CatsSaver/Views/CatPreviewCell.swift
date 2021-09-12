@@ -16,4 +16,8 @@ class CatPreviewCell: UICollectionViewCell {
         self.layer.cornerRadius = 15
         // Initialization code
     }
+    
+    override func prepareForReuse() {
+        imageView.image = nil
+    }
 }

@@ -7,9 +7,10 @@
 
 import UIKit
 import AVFoundation
+import Kingfisher
 
 class DetailViewController: UIViewController {
-
+    
     let imageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
@@ -17,25 +18,35 @@ class DetailViewController: UIViewController {
         return imageView
     }()
     
-    private var image: UIImage?
+    private var model: PhotoModel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(imageView)
-        imageView.image = self.image
-        // Do any additional setup after loading the view.
     }
     
-    func setImage(image: UIImage) {
-        self.image = image
-        let aspectFitRect = AVMakeRect(aspectRatio: image.size, insideRect: view.bounds)
-        imageView.frame = aspectFitRect
+    func configure(model: PhotoModel, image: UIImage?) {
+        
+        self.model = model
+        guard let image = image else { return }
+        let aspectFitRect = AVMakeRect(aspectRatio: image.size, insideRect: self.view.bounds)
+        self.imageView.frame = aspectFitRect
+        self.imageView.image = image
     }
     
     @IBAction func save(_ sender: Any) {
-        guard let image = imageView.image else { return }
-
-        UIImageWriteToSavedPhotosAlbum(image, self, #selector(image(_:didFinishSavingWithError:contextInfo:)), nil)
+        
+        guard let model = model else { return }
+        ImageCache.default.retrieveImage(forKey: model.link) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let value):
+                guard let image = value.image else { return }
+                UIImageWriteToSavedPhotosAlbum(image, self, #selector(self.image(_:didFinishSavingWithError:contextInfo:)), nil)
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
     }
     
     @objc func image(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {

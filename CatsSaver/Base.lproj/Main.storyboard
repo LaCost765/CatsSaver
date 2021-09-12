@@ -16,14 +16,57 @@
                     <view key="view" contentMode="scaleToFill" id="KKN-2e-hb6">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="HO2-6T-nHB">
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <color key="backgroundColor" systemColor="systemGray6Color"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="0kL-9s-qrt">
+                                    <size key="itemSize" width="195" height="195"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CatPreviewCell" id="IwG-cE-4ol" customClass="CatPreviewCell" customModule="CatsSaver" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="195" height="195"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="RYT-qt-WdB">
+                                            <rect key="frame" x="0.0" y="0.0" width="195" height="195"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Nvq-VY-wyz">
+                                                    <rect key="frame" x="0.0" y="0.0" width="195" height="195"/>
+                                                </imageView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="Nvq-VY-wyz" firstAttribute="top" secondItem="RYT-qt-WdB" secondAttribute="top" id="IaM-hZ-3xZ"/>
+                                                <constraint firstAttribute="trailing" secondItem="Nvq-VY-wyz" secondAttribute="trailing" id="L7L-bW-5ai"/>
+                                                <constraint firstItem="Nvq-VY-wyz" firstAttribute="leading" secondItem="RYT-qt-WdB" secondAttribute="leading" id="vG8-gv-7nR"/>
+                                                <constraint firstAttribute="bottom" secondItem="Nvq-VY-wyz" secondAttribute="bottom" id="wax-ra-k03"/>
+                                            </constraints>
+                                        </collectionViewCellContentView>
+                                        <size key="customSize" width="195" height="195"/>
+                                        <connections>
+                                            <outlet property="imageView" destination="Nvq-VY-wyz" id="Enu-Rv-sat"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="G6a-3G-nM1"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="G6a-3G-nM1" firstAttribute="bottom" secondItem="HO2-6T-nHB" secondAttribute="bottom" id="21l-4C-Fo3"/>
+                            <constraint firstItem="HO2-6T-nHB" firstAttribute="top" secondItem="G6a-3G-nM1" secondAttribute="top" id="Aad-4R-rWa"/>
+                            <constraint firstItem="HO2-6T-nHB" firstAttribute="leading" secondItem="G6a-3G-nM1" secondAttribute="leading" id="J53-18-uqF"/>
+                            <constraint firstItem="G6a-3G-nM1" firstAttribute="trailing" secondItem="HO2-6T-nHB" secondAttribute="trailing" id="a4u-hL-KtP"/>
+                        </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="" image="star.fill" catalog="system" id="RuK-mU-6bO"/>
+                    <navigationItem key="navigationItem" id="wB2-Ra-L6X"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4jt-Q8-08r" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="750.72463768115949" y="433.92857142857139"/>
+            <point key="canvasLocation" x="1660.8695652173915" y="433.92857142857139"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="3mQ-zR-28A">
@@ -35,7 +78,7 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
-                        <segue destination="c5l-CJ-om2" kind="relationship" relationship="viewControllers" id="5Ok-fO-07y"/>
+                        <segue destination="Qm0-iM-F7f" kind="relationship" relationship="viewControllers" id="5Ok-fO-07y"/>
                         <segue destination="3a2-0X-7eu" kind="relationship" relationship="viewControllers" id="DJl-kE-pKW"/>
                     </connections>
                 </tabBarController>
@@ -83,7 +126,7 @@
                                         <size key="customSize" width="178" height="178"/>
                                         <connections>
                                             <outlet property="imageView" destination="the-0h-W4w" id="3ft-aA-60E"/>
-                                            <segue destination="Mcm-bD-Jxn" kind="show" identifier="ShowDetail" id="xwc-5B-HMh"/>
+                                            <segue destination="Mcm-bD-Jxn" kind="show" identifier="ShowDetail" id="RB5-uW-ajC"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -152,6 +195,25 @@
                 <customObject id="KEq-d5-cfc" customClass="ZoomTransitionDelegate" customModule="CatsSaver" customModuleProvider="target"/>
             </objects>
             <point key="canvasLocation" x="740.57971014492762" y="-308.03571428571428"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="aWc-0K-4nK">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Qm0-iM-F7f" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="" image="star.fill" catalog="system" id="RuK-mU-6bO"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Nth-LN-owq">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="c5l-CJ-om2" kind="relationship" relationship="rootViewController" id="U0I-2e-eIn"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ic9-3K-ZVY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="750.72463768115949" y="433.92857142857139"/>
         </scene>
     </scenes>
     <resources>
