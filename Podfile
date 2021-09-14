@@ -12,8 +12,9 @@ target 'CatsSaver' do
   pod 'RxDataSources'
   pod 'Alamofire'
   pod 'Kingfisher'
-  pod 'RealmSwift'
   pod 'SwiftyJSON'
+  pod 'RealmSwift'
+  pod 'RxRealm'
 
   target 'CatsSaverTests' do
     inherit! :search_paths

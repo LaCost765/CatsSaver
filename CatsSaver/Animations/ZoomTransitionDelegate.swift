@@ -18,11 +18,13 @@ enum TransitionState {
     case final
 }
 
+
+/// - Создает анимацию перехода между 2 вью контроллерами, в частности - анимацию перехода от картинки в свернутом состоянии - к картинке на весь экран
 class ZoomTransitionDelegate: NSObject {
     
-    var transitionDuration = 0.5
+    var transitionDuration = 0.55
     var operation: UINavigationController.Operation = .none
-    private let backgroundScale = CGFloat(0.8)
+    private let backgroundScale = CGFloat(0.9)
     
     typealias ZoomingViews = (otherView: UIView, imageView: UIView)
     
@@ -69,15 +71,16 @@ extension ZoomTransitionDelegate: UIViewControllerAnimatedTransitioning {
         let backgroundImageView = maybeBackgroundImageView!
         let foregroundImageView = maybeForegroundImageView!
         
-        let imageViewSnapshot = UIImageView(image: backgroundImageView.image)
-        imageViewSnapshot.contentMode = .scaleAspectFill
-        imageViewSnapshot.layer.masksToBounds = true
-        if operation == .pop {
-            imageViewSnapshot.layer.cornerRadius = 15
+        let imageViewSnapshot = UIImageView(image: foregroundImageView.image)
+        if imageViewSnapshot.image != nil {
+            imageViewSnapshot.contentMode = .scaleAspectFill
+            imageViewSnapshot.layer.masksToBounds = true
+            if operation == .pop {
+                imageViewSnapshot.layer.cornerRadius = 15
+            }
+            backgroundImageView.isHidden = true
+            foregroundImageView.isHidden = true
         }
-        
-        backgroundImageView.isHidden = true
-        foregroundImageView.isHidden = true
         
         let foregroundVCBackgroundColor = foregroundVC.view.backgroundColor
         foregroundVC.view.backgroundColor = .clear
