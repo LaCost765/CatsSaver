@@ -12,31 +12,15 @@ import RxRelay
 import Alamofire
 import Kingfisher
 
-struct SectionOfCustomData {
-    var header: String
-    var items: [Item]
-}
-extension SectionOfCustomData: SectionModelType {
-    typealias Item = PhotoModel
-    
-    init(original: SectionOfCustomData, items: [Item]) {
-        self = original
-        self.items = items
-    }
-    
-    mutating func appendNewItem(item: Item) {
-        
-        items.append(item)
-    }
-}
-
 class HomeViewModel {
     
+    // MARK: - Cвойства
+    
     let dataSource = RxCollectionViewSectionedReloadDataSource<SectionOfCustomData>(
-        configureCell: { dataSource, collectionView, indexPath, model in
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CatPreviewCell", for: indexPath) as? CatPreviewCell else { return UICollectionViewCell()}
+        configureCell: { dataSource, collectionView, indexPath, data in
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CatPreviewCell.identifier, for: indexPath) as? CatPreviewCell else { return UICollectionViewCell()}
             
-            let url = URL(string: model.link)
+            let url = URL(string: data.link)
             DispatchQueue.main.async {
                 cell.imageView.kf.indicatorType = .activity
                 cell.imageView.kf.setImage(with: url,
@@ -54,20 +38,20 @@ class HomeViewModel {
         return view
     }
     
-    
+    let bag = DisposeBag()
     let dataSection: BehaviorRelay<[SectionOfCustomData]>
     private(set) var section: SectionOfCustomData
+    private var pages: [Int]?
+    private var inProgress = false // Отслеживает, запущен ли уже в данный момент процесс загрузки фотографий с сервера, чтобы не допустить создания нескольких запросов одновременно
+    
+    // MARK: - Инициализаторы
     
     init() {
         dataSection = BehaviorRelay<[SectionOfCustomData]>(value: [])
         section = SectionOfCustomData(header: "", items: [])
-        setupKingfisher()
     }
     
-    func setupKingfisher() {
-        ImageCache.default.clearCache()
-        ImageCache.default.memoryStorage.config.totalCostLimit = 100 * 1024 * 1024
-    }
+    // MARK: - Методы
     
     func loadNewPhotos() {
                 
@@ -85,27 +69,25 @@ class HomeViewModel {
         }
     }
     
-    private var pages: [Int]?
-    private var inProgress = false
+    /// - Загружает 20 фотографий с указанной страницы. Количество страниц определяется после вызова метода getPages, а сами страницы храняется в pages
     private func loadNewPage(page: Int) {
         
         let headers: HTTPHeaders = [
-            "x-api-key": "f0ebf856-c45c-486d-8869-a65d01297783"
+            CatAPI.HeaderData.key.rawValue: "f0ebf856-c45c-486d-8869-a65d01297783"
         ]
         let params: Parameters = [
-            "limit": 20,
-            "page": page,
-            "order": "ASC"
+            CatAPI.BodyData.limit.rawValue: 20,
+            CatAPI.BodyData.page.rawValue: page,
+            CatAPI.BodyData.order.rawValue: "ASC"
         ]
         
-        NetworkManager.shared.makeRequest(url: "https://api.thecatapi.com/v1/images/search",
+        NetworkManager.shared.makeRequest(url: CatAPI.urlValue.rawValue,
                                           params: params,
                                           headers: headers) { data in
-            ParserJSON.getPhotosData(from: data)
-                .subscribe(onNext: { [weak self] dataTuple in
+            _ = ParserJSON.getPhotosData(from: data)
+                .subscribe(onNext: { [weak self] data in
                     guard let self = self else { return }
-                    let model = PhotoModel(id: dataTuple.id, link: dataTuple.link)
-                    self.section.appendNewItem(item: model)
+                    self.section.appendNewItem(item: data)
                     self.dataSection.accept([self.section])
                 }, onCompleted: { [weak self] in
                     guard let self = self else { return }
@@ -114,24 +96,50 @@ class HomeViewModel {
         }
     }
     
+    /// - Метод нужен для того, чтобы определить, сколько в данный момент на сервере есть фотографий и сколько нужно страниц, чтобы отобразить их все по 20 штук
     func getPages(completion: @escaping ([Int]) -> Void) {
         let headers: HTTPHeaders = [
-            "x-api-key": "f0ebf856-c45c-486d-8869-a65d01297783"
+            CatAPI.HeaderData.key.rawValue: "f0ebf856-c45c-486d-8869-a65d01297783"
         ]
         let params: Parameters = [
-            "limit": 1,
+            CatAPI.BodyData.limit.rawValue: 1
         ]
         
-        NetworkManager.shared.makeRequest(url: "https://api.thecatapi.com/v1/images/search",
+        NetworkManager.shared.makeRequest(url: CatAPI.urlValue.rawValue,
                                           params: params,
                                           headers: headers)
         { (responseHeaders: [AnyHashable : Any]) in
             
-            guard let value = responseHeaders["pagination-count"] as? String,
+            guard let value = responseHeaders[CatAPI.HeaderData.pagination.rawValue] as? String,
                   let paginationCount = Int(value) else { return }
             
             let pagesCount = paginationCount / 20
             completion(Array(0..<pagesCount).shuffled())
         }
     }
+}
+
+
+/// - Тип для источника данных таблицы. Такой вид у него, потому что этот источник ориентирован на работу с секциями. В моем случае секция 1ы
+struct SectionOfCustomData {
+    var header: String
+    var items: [Item]
+}
+
+extension SectionOfCustomData: SectionModelType {
+    typealias Item = PhotoData
+    
+    init(original: SectionOfCustomData, items: [Item]) {
+        self = original
+        self.items = items
+    }
+    
+    mutating func appendNewItem(item: Item) {
+        items.append(item)
+    }
+}
+
+struct PhotoData {
+    let id: String
+    let link: String
 }

@@ -27,15 +27,11 @@ class NetworkManager {
                 return
             }
             
-            if let responseHeaders = response.response?.allHeaderFields {
-                if let count = responseHeaders["pagination-count"] as? Int {
-                    print("count: \(count)")
-                }
-                completion(data)
-            }
+            completion(data)
         }
     }
     
+    /// - Метод нужен для получения хедеров из ответа сервера
     func makeRequest(url: String,
                      params: Parameters = [:],
                      headers: HTTPHeaders = [:],

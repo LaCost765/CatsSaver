@@ -11,9 +11,9 @@ import SwiftyJSON
 
 class ParserJSON {
     
-    static func getPhotosData(from jsonData: Data) -> Observable<(id: String, link: String)> {
+    static func getPhotosData(from jsonData: Data) -> Observable<PhotoData> {
         
-        return Observable<(id: String, link: String)>.create { observer -> Disposable in
+        return Observable<PhotoData>.create { observer -> Disposable in
             
             let disposable = Disposables.create()
             let json = JSON(jsonData)
@@ -22,7 +22,7 @@ class ParserJSON {
             catsData.forEach { obj in
                 if let url = obj["url"].string,
                    let id = obj["id"].string {
-                    observer.onNext((id: id, link: url))
+                    observer.onNext(PhotoData(id: id, link: url))
                 }
             }
             observer.onCompleted()

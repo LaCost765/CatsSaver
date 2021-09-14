@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		742F040526EF894C00E8CC27 /* CatHeadView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742F040426EF894C00E8CC27 /* CatHeadView.swift */; };
+		742F040726F0AE6900E8CC27 /* RealmManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742F040626F0AE6900E8CC27 /* RealmManager.swift */; };
+		742F040926F122B200E8CC27 /* CatAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 742F040826F122B200E8CC27 /* CatAPI.swift */; };
+		742F040D26F132B100E8CC27 /* kitty.png in Resources */ = {isa = PBXBuildFile; fileRef = 742F040C26F132B100E8CC27 /* kitty.png */; };
 		7455617126E7B7B700D28ED3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7455617026E7B7B700D28ED3 /* AppDelegate.swift */; };
 		7455617326E7B7B700D28ED3 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7455617226E7B7B700D28ED3 /* SceneDelegate.swift */; };
 		7455617826E7B7B700D28ED3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7455617626E7B7B700D28ED3 /* Main.storyboard */; };
@@ -19,13 +23,12 @@
 		745561B026E8D26700D28ED3 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745561AF26E8D26700D28ED3 /* HomeViewModel.swift */; };
 		745561B326E8E9BF00D28ED3 /* CatPreviewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745561B126E8E9BF00D28ED3 /* CatPreviewCell.swift */; };
 		745561B726E8EC3400D28ED3 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 745561B626E8EC3400D28ED3 /* HomeViewController.swift */; };
-		7476E6B226EB92C9004F58F4 /* PhotoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7476E6B126EB92C9004F58F4 /* PhotoModel.swift */; };
 		7476E6B426EB9914004F58F4 /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7476E6B326EB9914004F58F4 /* DetailViewModel.swift */; };
 		74865B1126EA25CC00C196E8 /* ZoomTransitionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74865B1026EA25CC00C196E8 /* ZoomTransitionDelegate.swift */; };
 		74865B1326EA262200C196E8 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74865B1226EA262200C196E8 /* DetailViewController.swift */; };
-		74865B1526EA847E00C196E8 /* PBImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74865B1426EA847E00C196E8 /* PBImageView.swift */; };
 		74865B1926EB562600C196E8 /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74865B1826EB562600C196E8 /* FavoritesViewController.swift */; };
 		74BD951926E9DF9100A942EB /* FooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74BD951826E9DF9100A942EB /* FooterView.swift */; };
+		74F8D47426EE2C6300DA090D /* PhotoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74F8D47326EE2C6300DA090D /* PhotoModel.swift */; };
 		761714277373C0D11575CF89 /* Pods_CatsSaverTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EA71471A733EC0AF5AE5C4C /* Pods_CatsSaverTests.framework */; };
 		8A98068B0BE90CF0C08C8586 /* Pods_CatsSaver_CatsSaverUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7EDD027A703D54BDA26F32D0 /* Pods_CatsSaver_CatsSaverUITests.framework */; };
 		A5057B7926AE4E14BAC970BE /* Pods_CatsSaver.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 693BEAA95F8F31CC7EC74E3A /* Pods_CatsSaver.framework */; };
@@ -53,6 +56,10 @@
 		229C692D5C65DC07503ED85B /* Pods-CatsSaver-CatsSaverUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CatsSaver-CatsSaverUITests.release.xcconfig"; path = "Target Support Files/Pods-CatsSaver-CatsSaverUITests/Pods-CatsSaver-CatsSaverUITests.release.xcconfig"; sourceTree = "<group>"; };
 		58100C9A2023F6BC07FDE746 /* Pods-CatsSaverTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CatsSaverTests.debug.xcconfig"; path = "Target Support Files/Pods-CatsSaverTests/Pods-CatsSaverTests.debug.xcconfig"; sourceTree = "<group>"; };
 		693BEAA95F8F31CC7EC74E3A /* Pods_CatsSaver.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CatsSaver.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		742F040426EF894C00E8CC27 /* CatHeadView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatHeadView.swift; sourceTree = "<group>"; };
+		742F040626F0AE6900E8CC27 /* RealmManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmManager.swift; sourceTree = "<group>"; };
+		742F040826F122B200E8CC27 /* CatAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatAPI.swift; sourceTree = "<group>"; };
+		742F040C26F132B100E8CC27 /* kitty.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = kitty.png; sourceTree = "<group>"; };
 		7455616D26E7B7B700D28ED3 /* CatsSaver.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CatsSaver.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7455617026E7B7B700D28ED3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7455617226E7B7B700D28ED3 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -71,13 +78,12 @@
 		745561AF26E8D26700D28ED3 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		745561B126E8E9BF00D28ED3 /* CatPreviewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatPreviewCell.swift; sourceTree = "<group>"; };
 		745561B626E8EC3400D28ED3 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
-		7476E6B126EB92C9004F58F4 /* PhotoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoModel.swift; sourceTree = "<group>"; };
 		7476E6B326EB9914004F58F4 /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
 		74865B1026EA25CC00C196E8 /* ZoomTransitionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomTransitionDelegate.swift; sourceTree = "<group>"; };
 		74865B1226EA262200C196E8 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
-		74865B1426EA847E00C196E8 /* PBImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PBImageView.swift; sourceTree = "<group>"; };
 		74865B1826EB562600C196E8 /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
 		74BD951826E9DF9100A942EB /* FooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FooterView.swift; sourceTree = "<group>"; };
+		74F8D47326EE2C6300DA090D /* PhotoModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoModel.swift; sourceTree = "<group>"; };
 		7EA71471A733EC0AF5AE5C4C /* Pods_CatsSaverTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CatsSaverTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7EDD027A703D54BDA26F32D0 /* Pods_CatsSaver_CatsSaverUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CatsSaver_CatsSaverUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F845D0C39D762A2C1938F8F /* Pods-CatsSaver.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CatsSaver.release.xcconfig"; path = "Target Support Files/Pods-CatsSaver/Pods-CatsSaver.release.xcconfig"; sourceTree = "<group>"; };
@@ -126,6 +132,24 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		742F040A26F1309600E8CC27 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				7455617626E7B7B700D28ED3 /* Main.storyboard */,
+				7455617B26E7B7B700D28ED3 /* LaunchScreen.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		742F040B26F130BA00E8CC27 /* Delegates */ = {
+			isa = PBXGroup;
+			children = (
+				7455617026E7B7B700D28ED3 /* AppDelegate.swift */,
+				7455617226E7B7B700D28ED3 /* SceneDelegate.swift */,
+			);
+			path = Delegates;
+			sourceTree = "<group>";
+		};
 		7455616426E7B7B700D28ED3 = {
 			isa = PBXGroup;
 			children = (
@@ -151,17 +175,14 @@
 		7455616F26E7B7B700D28ED3 /* CatsSaver */ = {
 			isa = PBXGroup;
 			children = (
-				74865B0F26EA25C000C196E8 /* Animations */,
 				745561A226E8854900D28ED3 /* Views */,
 				745561A126E8854500D28ED3 /* ViewModels */,
 				745561A026E8853900D28ED3 /* Models */,
 				745561A326E88A1500D28ED3 /* Utilities */,
-				7455617026E7B7B700D28ED3 /* AppDelegate.swift */,
-				7455617226E7B7B700D28ED3 /* SceneDelegate.swift */,
-				7455617626E7B7B700D28ED3 /* Main.storyboard */,
+				74865B0F26EA25C000C196E8 /* Animations */,
 				7455617926E7B7B700D28ED3 /* Assets.xcassets */,
-				7455617B26E7B7B700D28ED3 /* LaunchScreen.storyboard */,
 				7455617E26E7B7B700D28ED3 /* Info.plist */,
+				742F040C26F132B100E8CC27 /* kitty.png */,
 			);
 			path = CatsSaver;
 			sourceTree = "<group>";
@@ -187,7 +208,7 @@
 		745561A026E8853900D28ED3 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				7476E6B126EB92C9004F58F4 /* PhotoModel.swift */,
+				74F8D47326EE2C6300DA090D /* PhotoModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -204,12 +225,13 @@
 		745561A226E8854900D28ED3 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				745561B126E8E9BF00D28ED3 /* CatPreviewCell.swift */,
 				745561B626E8EC3400D28ED3 /* HomeViewController.swift */,
-				74BD951826E9DF9100A942EB /* FooterView.swift */,
-				74865B1226EA262200C196E8 /* DetailViewController.swift */,
-				74865B1426EA847E00C196E8 /* PBImageView.swift */,
 				74865B1826EB562600C196E8 /* FavoritesViewController.swift */,
+				74865B1226EA262200C196E8 /* DetailViewController.swift */,
+				745561B126E8E9BF00D28ED3 /* CatPreviewCell.swift */,
+				74BD951826E9DF9100A942EB /* FooterView.swift */,
+				742F040A26F1309600E8CC27 /* Storyboards */,
+				742F040B26F130BA00E8CC27 /* Delegates */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -219,6 +241,8 @@
 			children = (
 				745561AB26E8C2C400D28ED3 /* NetworkManager.swift */,
 				745561AD26E8C47700D28ED3 /* ParserJSON.swift */,
+				742F040626F0AE6900E8CC27 /* RealmManager.swift */,
+				742F040826F122B200E8CC27 /* CatAPI.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -227,6 +251,7 @@
 			isa = PBXGroup;
 			children = (
 				74865B1026EA25CC00C196E8 /* ZoomTransitionDelegate.swift */,
+				742F040426EF894C00E8CC27 /* CatHeadView.swift */,
 			);
 			path = Animations;
 			sourceTree = "<group>";
@@ -350,6 +375,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7455617D26E7B7B700D28ED3 /* LaunchScreen.storyboard in Resources */,
+				742F040D26F132B100E8CC27 /* kitty.png in Resources */,
 				7455617A26E7B7B700D28ED3 /* Assets.xcassets in Resources */,
 				7455617826E7B7B700D28ED3 /* Main.storyboard in Resources */,
 			);
@@ -481,17 +507,19 @@
 			files = (
 				74865B1126EA25CC00C196E8 /* ZoomTransitionDelegate.swift in Sources */,
 				745561AC26E8C2C400D28ED3 /* NetworkManager.swift in Sources */,
-				74865B1526EA847E00C196E8 /* PBImageView.swift in Sources */,
+				74F8D47426EE2C6300DA090D /* PhotoModel.swift in Sources */,
 				745561B026E8D26700D28ED3 /* HomeViewModel.swift in Sources */,
 				745561AE26E8C47700D28ED3 /* ParserJSON.swift in Sources */,
 				745561B326E8E9BF00D28ED3 /* CatPreviewCell.swift in Sources */,
 				7455617126E7B7B700D28ED3 /* AppDelegate.swift in Sources */,
 				74BD951926E9DF9100A942EB /* FooterView.swift in Sources */,
+				742F040726F0AE6900E8CC27 /* RealmManager.swift in Sources */,
 				74865B1326EA262200C196E8 /* DetailViewController.swift in Sources */,
 				7476E6B426EB9914004F58F4 /* DetailViewModel.swift in Sources */,
+				742F040926F122B200E8CC27 /* CatAPI.swift in Sources */,
 				745561B726E8EC3400D28ED3 /* HomeViewController.swift in Sources */,
 				74865B1926EB562600C196E8 /* FavoritesViewController.swift in Sources */,
-				7476E6B226EB92C9004F58F4 /* PhotoModel.swift in Sources */,
+				742F040526EF894C00E8CC27 /* CatHeadView.swift in Sources */,
 				7455617326E7B7B700D28ED3 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

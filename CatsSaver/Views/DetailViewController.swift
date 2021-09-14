@@ -8,11 +8,15 @@
 import UIKit
 import AVFoundation
 import Kingfisher
-import RxRealm
-import RealmSwift
 import RxSwift
+import RealmSwift
+import RxRealm
 
 class DetailViewController: UIViewController {
+    
+    // MARK: - Свойства
+    
+    @IBOutlet weak var favoritesButton: UIBarButtonItem! // Кнопка может работать в двух режимах - добавить в избранное и удалить из избранного. Зависит от того, с какого экрана мы попали на этот вью контроллер. Из избранного - значит удаление, из поиска - добавление
     
     let imageView: UIImageView = {
         let imageView = UIImageView()
@@ -21,16 +25,29 @@ class DetailViewController: UIViewController {
         return imageView
     }()
     
-    private var model: PhotoModel?
+    var viewModel: DetailViewModel? {
+        didSet {
+            guard let viewModel = viewModel else { return }
+            switch viewModel.source {
+            case .search:
+                self.favoritesButton.image = UIImage(systemName: "star")
+            case .favorites:
+                self.favoritesButton.image = UIImage(systemName: "trash")
+            }
+        }
+    }
+    
+    // MARK: - Методы
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(imageView)
     }
-    
-    func configure(model: PhotoModel, image: UIImage?) {
+
+    /// - Метод конфигурации вью контроллера, который обязательно должен быть вызван перед его отображением
+    func configure(source: DetailSource, photoData: PhotoData, image: UIImage?) {
         
-        self.model = model
+        viewModel = DetailViewModel(photoData: photoData, source: source)
         guard let image = image else { return }
         let aspectFitRect = AVMakeRect(aspectRatio: image.size, insideRect: self.view.bounds)
         self.imageView.frame = aspectFitRect
@@ -39,34 +56,30 @@ class DetailViewController: UIViewController {
     
     @IBAction func save(_ sender: UITabBarItem) {
         
-        guard let model = model else { return }
-        ImageCache.default.retrieveImage(forKey: model.link) { [weak self] result in
-            guard let self = self else { return }
-            switch result {
-            case .success(let value):
-                guard let image = value.image else { return }
-                UIImageWriteToSavedPhotosAlbum(image, self, #selector(self.image(_:didFinishSavingWithError:contextInfo:)), nil)
-            case .failure(let error):
-                print(error.localizedDescription)
-            }
-        }
+        guard let viewModel = viewModel else { return }
+        viewModel.savePhotoToDisk(completion: #selector(self.image(_:didFinishSavingWithError:contextInfo:)), completionTarget: self)
     }
     
-    @IBAction func addToFavorites(_ sender: UITabBarItem) {
-        guard let model = model else { return }
-        ImageCache.default.retrieveImage(forKey: model.link) { result in
+    @IBAction func favoritesButtonTapped(_ sender: UITabBarItem) {
+        guard let viewModel = viewModel else { return }
+        viewModel.favoritesButtonTapped { result in
+            let ac = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "OK", style: .default))
             switch result {
-            case .success(let value):
-                guard let image = value.image else { return }
-                let modelCopy = PhotoModel(id: model.id, link: model.link)
-                modelCopy.data = image.pngData()
-                Observable.from(object: modelCopy)
-                    .subscribe(Realm.rx.add())
-                print(Realm.Configuration.defaultConfiguration.fileURL!)
+            case .success(let message):
+                ac.title = message
             case .failure(let error):
-                print(error.localizedDescription)
+                ac.title = "Ошибка!"
+                ac.message = error.localizedDescription
             }
+            DispatchQueue.main.async { [weak self] in
+                self?.present(ac, animated: true)
+            }
+        } completionForDelete: { [weak self] in
+            self?.imageView.image = nil
+            self?.navigationController?.popViewController(animated: true)
         }
+
     }
     
     @objc func image(_ image: UIImage, didFinishSavingWithError error: Error?, contextInfo: UnsafeRawPointer) {
@@ -91,6 +104,4 @@ extension DetailViewController: ZoomingViewController {
     func zoomingBackgroundView(for transition: ZoomTransitionDelegate) -> UIView? {
         return nil
     }
-    
-    
 }
